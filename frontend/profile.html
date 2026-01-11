@@ -3,12 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - StoryNest</title>
+    <title>My Profile - StoryNest</title>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png">
+    <style>
+        /* Profile Page Specific Styles */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff6b35 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-details {
+            flex: 1;
+        }
+        
+        .profile-username {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-bio {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-number {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .profile-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .post-card-profile {
+            background: var(--card-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .post-card-profile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .post-media-preview {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: var(--hover-color);
+        }
+        
+        .post-content-preview {
+            padding: 1.25rem;
+        }
+        
+        .post-title-profile {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .post-meta-profile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .post-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .no-posts-message {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--card-color);
+            border-radius: 12px;
+            border: 2px dashed var(--border-color);
+        }
+        
+        .no-posts-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .loading-posts {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-header {
+                padding: 1.5rem;
+            }
+            
+            .profile-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-username {
+                font-size: 1.75rem;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+            
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-actions {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-header {
+                padding: 1rem;
+            }
+            
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .profile-username {
+                font-size: 1.5rem;
+            }
+            
+            .profile-bio {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .profile-header, .posts-grid, .empty-state {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        /* Dark Mode Adjustments */
+        [data-theme="dark"] .profile-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #cc5500 100%);
+        }
+        
+        [data-theme="dark"] .post-card-profile {
+            background: #1a1a1a;
+            border-color: #333;
+        }
+        
+        [data-theme="dark"] .post-card-profile:hover {
+            border-color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation Header -->
     <header class="header">
         <nav class="nav-container">
             <div class="nav-content">
@@ -16,64 +301,319 @@
                     <h1>StoryNest</h1>
                 </a>
                 <div class="nav-menu">
-                    <!-- Auth buttons will be inserted by auth.js -->
+                    <!-- Auth buttons will be dynamically inserted by auth.js -->
+                    <a href="/create-post.html" class="btn btn-primary" style="display: none;" id="createPostNavBtn">
+                        Create Post
+                    </a>
                 </div>
             </div>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main class="main-container">
+        <!-- Profile Header -->
         <div class="profile-header">
             <div class="profile-info">
                 <img id="profileAvatar" src="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png" 
-                     alt="Profile" class="profile-avatar">
-                <div>
-                    <h2 id="profileUsername">Loading...</h2>
-                    <p id="profileBio">No bio yet</p>
-                    <p id="profileStats">Posts: 0 | Joined: Loading...</p>
+                     alt="Profile Picture" class="profile-avatar"
+                     onerror="this.src='https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png'">
+                
+                <div class="profile-details">
+                    <h1 id="profileUsername" class="profile-username">Loading...</h1>
+                    <p id="profileBio" class="profile-bio">No bio yet</p>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span id="postCount" class="stat-number">0</span>
+                            <span class="stat-label">Posts</span>
+                        </div>
+                        <div class="stat-item">
+                            <span id="joinDate" class="stat-number">-</span>
+                            <span class="stat-label">Joined</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div style="margin-top: 1rem;">
-                <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
+            <div class="profile-actions">
+                <button id="editProfileBtn" class="btn" style="background: white; color: var(--primary-color); border: none;">
+                    ✏️ Edit Profile
+                </button>
+                <a href="/create-post.html" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255, 255, 255, 0.3);">
+                    📝 Create Post
+                </a>
+                <button id="logoutBtn" class="btn" style="background: transparent; color: white; border: 1px solid rgba(255, 255, 255, 0.3);">
+                    👋 Logout
+                </button>
             </div>
         </div>
 
+        <!-- User Posts Section -->
         <div class="feed">
             <div class="feed-header">
-                <h3>My Posts</h3>
+                <h2>My Posts</h2>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="Story">Story</button>
+                    <button class="category-btn" data-category="Confession">Confession</button>
+                    <button class="category-btn" data-category="Life">Life</button>
+                    <button class="category-btn" data-category="Funny">Funny</button>
+                </div>
             </div>
+            
             <div id="userPosts">
-                <div class="spinner"></div>
+                <!-- Posts will be loaded here -->
+                <div class="loading-posts">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 1rem; color: var(--text-secondary);">Loading your posts...</p>
+                </div>
             </div>
+        </div>
+
+        <!-- Empty State (Hidden by default) -->
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <div class="empty-icon">📝</div>
+            <h2>No Posts Yet</h2>
+            <p style="color: var(--text-secondary); margin: 1rem 0; max-width: 400px; margin-left: auto; margin-right: auto;">
+                You haven't created any posts yet. Share your first story with the community!
+            </p>
+            <a href="/create-post.html" class="btn btn-primary" style="margin-top: 1rem;">
+                Create Your First Post
+            </a>
         </div>
     </main>
 
     <!-- Edit Profile Modal -->
     <div id="editProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3>Edit Profile</h3>
+        <div class="modal-content" style="max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="margin: 0;">Edit Profile</h2>
+                <span class="close-modal" style="font-size: 1.5rem; cursor: pointer; color: var(--text-secondary);">&times;</span>
+            </div>
+            
             <form id="editProfileForm">
                 <div class="form-group">
                     <label for="editBio" class="form-label">Bio</label>
-                    <textarea id="editBio" class="form-input" rows="4" placeholder="Tell us about yourself..."></textarea>
+                    <textarea id="editBio" class="form-input" rows="4" 
+                              placeholder="Tell us about yourself..." maxlength="500"></textarea>
+                    <div style="text-align: right; margin-top: 0.25rem;">
+                        <small style="color: var(--text-secondary);">
+                            <span id="bioCharCount">0</span>/500 characters
+                        </small>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="profilePicture" class="form-label">Profile Picture</label>
-                    <input type="file" id="profilePicture" accept="image/*">
-                    <small>Max size: 5MB. Allowed: JPG, PNG, WebP</small>
+                    <div style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 1.5rem; text-align: center; cursor: pointer;"
+                         onclick="document.getElementById('profilePicture').click()"
+                         ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
+                         id="profilePictureDropZone">
+                        <div style="font-size: 3rem; margin-bottom: 0.5rem;">📁</div>
+                        <p style="margin: 0; color: var(--text-secondary);">
+                            Drag & drop an image or click to browse
+                        </p>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--text-secondary);">
+                            Max size: 5MB • JPG, PNG, WebP, GIF
+                        </p>
+                    </div>
+                    <input type="file" id="profilePicture" accept="image/*" style="display: none;">
+                    
+                    <div id="profilePicturePreview" style="margin-top: 1rem; display: none;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; background: var(--hover-color); padding: 1rem; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <img id="previewImage" src="" alt="Preview" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                                <div>
+                                    <div id="previewFileName" style="font-weight: 500;"></div>
+                                    <div id="previewFileSize" style="color: var(--text-secondary); font-size: 0.9rem;"></div>
+                                </div>
+                            </div>
+                            <button type="button" onclick="clearProfilePicture()" style="background: none; border: none; color: #ff4444; cursor: pointer; font-size: 1.5rem;">
+                                ×
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                    <button type="button" id="cancelEditBtn" class="btn btn-outline">Cancel</button>
+                <div class="form-group" style="display: flex; gap: 0.5rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        <span id="saveBtnText">Save Changes</span>
+                        <span id="saveBtnSpinner" class="spinner-small" style="display: none; margin-left: 0.5rem;"></span>
+                    </button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-outline" style="flex: 1;">
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Success Notification -->
+    <div id="successNotification" style="display: none; position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;">
+        Profile updated successfully!
+    </div>
+
+    <!-- Error Notification -->
+    <div id="errorNotification" style="display: none; position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 1rem 1.5rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1000;">
+        Error updating profile
+    </div>
+
+    <script>
+        // Drag and drop functions
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('profilePictureDropZone').style.borderColor = 'var(--primary-color)';
+            document.getElementById('profilePictureDropZone').style.background = 'rgba(255, 107, 0, 0.05)';
+        }
+        
+        function handleDragLeave(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('profilePictureDropZone').style.borderColor = 'var(--border-color)';
+            document.getElementById('profilePictureDropZone').style.background = '';
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById('profilePictureDropZone').style.borderColor = 'var(--border-color)';
+            document.getElementById('profilePictureDropZone').style.background = '';
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                document.getElementById('profilePicture').files = files;
+                previewProfilePicture(files[0]);
+            }
+        }
+        
+        function previewProfilePicture(file) {
+            if (!file) return;
+            
+            if (!file.type.startsWith('image/')) {
+                showError('Please select an image file');
+                return;
+            }
+            
+            if (file.size > 5 * 1024 * 1024) {
+                showError('File size must be less than 5MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('profilePicturePreview');
+                const previewImage = document.getElementById('previewImage');
+                const fileName = document.getElementById('previewFileName');
+                const fileSize = document.getElementById('previewFileSize');
+                
+                previewImage.src = e.target.result;
+                fileName.textContent = file.name;
+                fileSize.textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+                
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function clearProfilePicture() {
+            document.getElementById('profilePicture').value = '';
+            document.getElementById('profilePicturePreview').style.display = 'none';
+        }
+        
+        function showSuccess(message) {
+            const notification = document.getElementById('successNotification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.style.animation = 'slideIn 0.3s ease';
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 3000);
+        }
+        
+        function showError(message) {
+            const notification = document.getElementById('errorNotification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            notification.style.animation = 'slideIn 0.3s ease';
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 300);
+            }, 3000);
+        }
+        
+        // Character counter for bio
+        document.addEventListener('DOMContentLoaded', function() {
+            const bioTextarea = document.getElementById('editBio');
+            const charCount = document.getElementById('bioCharCount');
+            
+            if (bioTextarea && charCount) {
+                bioTextarea.addEventListener('input', function() {
+                    charCount.textContent = this.value.length;
+                });
+            }
+            
+            // File input change event
+            const fileInput = document.getElementById('profilePicture');
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    if (this.files.length > 0) {
+                        previewProfilePicture(this.files[0]);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Animations -->
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        .spinner-small {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+    <!-- Scripts -->
     <script src="/js/auth.js"></script>
     <script src="/js/profile.js"></script>
 </body>
