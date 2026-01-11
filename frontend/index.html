@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryNest - Share Your Stories</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <h1>StoryNest</h1>
+                </a>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search stories...">
+                </div>
+                
+                <div class="nav-menu">
+                    <!-- Auth buttons will be inserted by auth.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Feed -->
+        <section class="feed">
+            <div class="feed-header">
+                <h2>Latest Stories</h2>
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="Story">Story</button>
+                    <button class="category-btn" data-category="Confession">Confession</button>
+                    <button class="category-btn" data-category="Life">Life</button>
+                    <button class="category-btn" data-category="Funny">Funny</button>
+                    <button class="category-btn" data-category="Question">Question</button>
+                    <button class="category-btn" data-category="Media">Media</button>
+                </div>
+            </div>
+            
+            <div id="feed">
+                <!-- Posts will be loaded here -->
+                <div class="spinner"></div>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <a href="/create-post.html" class="btn btn-primary create-post-btn">Create Post</a>
+                <p>Share your story with the world</p>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>About StoryNest</h3>
+                <p>A place to share stories, confessions, and moments from life. Connect with others through shared experiences.</p>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Community Rules</h3>
+                <ul>
+                    <li>Be respectful to others</li>
+                    <li>No hate speech or harassment</li>
+                    <li>Respect privacy</li>
+                    <li>No spam or self-promotion</li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/posts.js"></script>
+</body>
+</html>

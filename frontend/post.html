@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - StoryNest</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png">
+    <style>
+        .post-detail {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .post-full-media {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .comments-section {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .comment-form {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--hover-color);
+            border-radius: 8px;
+        }
+        
+        .comment {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .comment-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .comment-content {
+            margin-bottom: 0.5rem;
+        }
+        
+        .comment-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        
+        .delete-comment-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .delete-comment-btn:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+        
+        .back-btn:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <h1>StoryNest</h1>
+                </a>
+                <div class="nav-menu">
+                    <!-- Auth buttons will be inserted by auth.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div>
+            <a href="/" class="back-btn">← Back to Feed</a>
+            
+            <!-- Post Detail -->
+            <div class="post-detail">
+                <div class="post-header">
+                    <img id="postAvatar" src="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png" 
+                         alt="Author" class="avatar">
+                    <div>
+                        <strong id="postAuthor">Loading...</strong>
+                        <div class="post-meta">
+                            Posted in <span id="postCategory"></span> • 
+                            <span id="postDate"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h1 id="postTitle" class="post-title"></h1>
+                
+                <div id="postContent" class="post-content" style="font-size: 1.1rem; line-height: 1.8;"></div>
+                
+                <div id="postMediaContainer"></div>
+                
+                <div class="post-actions" style="margin-top: 1.5rem;">
+                    <button id="likeBtn" class="like-btn">
+                        <span class="like-icon">❤️</span>
+                        <span id="likeCount">0</span> Likes
+                    </button>
+                    <button class="comment-btn">
+                        <span class="comment-icon">💬</span>
+                        <span id="commentCount">0</span> Comments
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Comment Form -->
+            <div class="comments-section">
+                <h3>Comments</h3>
+                
+                <div class="comment-form">
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <textarea id="commentText" class="form-input" 
+                                      rows="3" placeholder="Add a comment..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="commentImage" class="form-label">Add Image (Optional)</label>
+                            <input type="file" id="commentImage" accept="image/*">
+                            <small>Max size: 5MB. Images: JPG, PNG, WebP</small>
+                            <div id="commentImagePreview" style="margin-top: 0.5rem;"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+                
+                <!-- Comments List -->
+                <div id="commentsList">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/post.js"></script>
+</body>
+</html>

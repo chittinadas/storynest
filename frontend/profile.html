@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - StoryNest</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <h1>StoryNest</h1>
+                </a>
+                <div class="nav-menu">
+                    <!-- Auth buttons will be inserted by auth.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="profile-header">
+            <div class="profile-info">
+                <img id="profileAvatar" src="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png" 
+                     alt="Profile" class="profile-avatar">
+                <div>
+                    <h2 id="profileUsername">Loading...</h2>
+                    <p id="profileBio">No bio yet</p>
+                    <p id="profileStats">Posts: 0 | Joined: Loading...</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 1rem;">
+                <button id="editProfileBtn" class="btn btn-primary">Edit Profile</button>
+            </div>
+        </div>
+
+        <div class="feed">
+            <div class="feed-header">
+                <h3>My Posts</h3>
+            </div>
+            <div id="userPosts">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Edit Profile</h3>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editBio" class="form-label">Bio</label>
+                    <textarea id="editBio" class="form-input" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="profilePicture" class="form-label">Profile Picture</label>
+                    <input type="file" id="profilePicture" accept="image/*">
+                    <small>Max size: 5MB. Allowed: JPG, PNG, WebP</small>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-outline">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/profile.js"></script>
+</body>
+</html>

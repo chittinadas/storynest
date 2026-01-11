@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - StoryNest</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/MHz2HFfj/icons8-user-default-64.png">
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-input, select.form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        small {
+            display: block;
+            margin-top: 0.25rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        #mediaPreview img,
+        #mediaPreview video {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="nav-content">
+                <a href="/" class="logo">
+                    <h1>StoryNest</h1>
+                </a>
+                <div class="nav-menu">
+                    <!-- Auth buttons will be inserted by auth.js -->
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <div class="auth-container">
+            <h2>Create New Post</h2>
+            <form id="createPostForm">
+                <div class="form-group">
+                    <label for="postTitle" class="form-label">Title *</label>
+                    <input type="text" id="postTitle" class="form-input" 
+                           placeholder="Enter post title" required maxlength="200">
+                </div>
+                
+                <div class="form-group">
+                    <label for="postContent" class="form-label">Content/Story *</label>
+                    <textarea id="postContent" class="form-input" 
+                              placeholder="Write your story here..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postCategory" class="form-label">Category *</label>
+                    <select id="postCategory" class="form-input" required>
+                        <option value="">Select a category</option>
+                        <option value="Story">Story</option>
+                        <option value="Confession">Confession</option>
+                        <option value="Life">Life</option>
+                        <option value="Funny">Funny</option>
+                        <option value="Question">Question</option>
+                        <option value="Media">Media</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postType" class="form-label">Post Type *</label>
+                    <select id="postType" class="form-input" required>
+                        <option value="text">Text Only</option>
+                        <option value="mixed">Text + Media</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="mediaUploadSection" style="display: none;">
+                    <label for="postMedia" class="form-label">Media (Optional)</label>
+                    <input type="file" id="postMedia" accept="image/*,video/*">
+                    <small>Max size: 50MB. Images: JPG, PNG, WebP. Videos: MP4</small>
+                    <div id="mediaPreview"></div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                        Create Post
+                    </button>
+                    <button type="button" class="btn btn-outline" style="width: 100%; margin-top: 0.5rem; padding: 0.75rem;">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/create-post.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* Mobile Responsive */
+@media (max-width: 767px) {
+  .nav-content {
+    flex-wrap: wrap;
+  }
+  
+  .search-container {
+    order: 3;
+    flex: 0 0 100%;
+    margin: 0.5rem 0 0 0;
+  }
+  
+  .post-media {
+    max-height: 300px;
+  }
+  
+  .modal-content {
+    margin: 5% auto;
+    width: 95%;
+  }
+  
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* Tablet Responsive */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #030303;
+    --card-color: #1a1a1b;
+    --text-color: #d7dadc;
+    --text-secondary: #818384;
+    --border-color: #343536;
+    --hover-color: #272729;
+  }
+}
